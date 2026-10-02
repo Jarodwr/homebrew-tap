@@ -38,6 +38,8 @@ class HelixSteel < Formula
 
   test do
     assert_match "post-modern text editor", shell_output("#{bin}/hx --help")
-    assert_match "✓", shell_output("#{bin}/hx --health")
+    # Not `hx --health` like homebrew-core's helix: on this fork it never
+    # returns inside the brew test sandbox (fine on a normal shell).
+    assert_match(/helix \d+\.\d+/, shell_output("#{bin}/hx --version"))
   end
 end
