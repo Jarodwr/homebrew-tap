@@ -8,6 +8,11 @@ class HelixSteel < Formula
   license "MPL-2.0"
   head "https://github.com/mattwparas/helix.git", branch: "steel-event-system"
 
+  bottle do
+    root_url "https://github.com/Jarodwr/homebrew-tap/releases/download/helix-steel-25.07.1-steel.20260930"
+    sha256 cellar: :any, arm64_tahoe: "1d8fa57e9b33095360c771b209448785b8b53612fda4edd31d8440842854b606"
+  end
+
   depends_on "rust" => :build
 
   conflicts_with "helix", because: "both install `hx` binaries"
