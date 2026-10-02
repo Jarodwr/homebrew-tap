@@ -10,8 +10,8 @@ class HelixSteel < Formula
   head "https://github.com/mattwparas/helix.git", branch: "steel-event-system"
 
   bottle do
-    root_url "https://github.com/Jarodwr/homebrew-tap/releases/download/helix-steel-25.07.1-steel.20260930_1"
-    sha256 cellar: :any, arm64_tahoe: "ba4220b399224ac373c87c31af24500f799bb11135d990d168f5044921fae59b"
+    root_url "https://github.com/Jarodwr/homebrew-tap/releases/download/helix-steel-25.07.1-steel.20260930_2"
+    sha256 cellar: :any, arm64_tahoe: "e82a1e96f6c3b779461f780cc58b7f576be00fe4995668d6959dc2a5e45c74cf"
   end
 
   depends_on "pkgconf" => :build
