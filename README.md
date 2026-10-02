@@ -12,8 +12,13 @@ brew install jarodwr/tap/<formula>
 | Formula | What |
 |---|---|
 | `helix-steel` | [Helix](https://helix-editor.com) built from [mattwparas/helix `steel-event-system`](https://github.com/mattwparas/helix/blob/steel-event-system/STEEL.md), with the Steel plugin system enabled, plus `forge`, Steel's package manager |
+| `fennel-ls-rs` | [fennel-ls](https://github.com/Jarodwr/fennel-tools), the Fennel language server from fennel-tools (Rust). Conflicts with homebrew-core's Lua `fennel-ls` |
 
 ### helix-steel
+
+Everything this build changes compared with the fork (Steel, forge, the Fennel
+grammars and queries from fennel-tools) is documented in
+[docs/helix-steel.md](docs/helix-steel.md).
 
 Installs `hx`, so it conflicts with homebrew-core's `helix`:
 
@@ -30,12 +35,7 @@ brew install --HEAD jarodwr/tap/helix-steel
 brew upgrade --fetch-HEAD jarodwr/tap/helix-steel   # later, to update
 ```
 
-`forge` is built from the Steel commit that the fork's `Cargo.lock` pins, so
-when moving the Helix pin, update the `steel` resource to match
-(`grep -A2 'name = "steel-core"' Cargo.lock` in the fork).
-
-To move the pin, change `url`, `version` and `sha256` in
-`Formula/helix-steel.rb` (`curl -sL <url> | shasum -a 256`).
+To move a pin, see [Updating](docs/helix-steel.md#updating).
 
 ## Bottles (prebuilt binaries)
 

@@ -6,7 +6,7 @@ class HelixSteel < Formula
   version "25.07.1-steel.20260930"
   sha256 "4c8d590e82ea35b66762044f6ab0cc87c0bac4cb3244109ffcb3799df6fef870"
   license "MPL-2.0"
-  revision 1
+  revision 2
   head "https://github.com/mattwparas/helix.git", branch: "steel-event-system"
 
   bottle do
@@ -30,7 +30,16 @@ class HelixSteel < Formula
     sha256 "b2bcea2bf30c3906c4b073caf3f9b8ff33834e4b91d79d3eae4d5408ee77907b"
   end
 
+  # Fennel grammars and Helix queries from fennel-tools. Keep this pinned to
+  # the same commit as the fennel-ls-rs formula.
+  resource "fennel-tools" do
+    url "https://github.com/Jarodwr/fennel-tools/archive/ebbb8d10f9f58be986f0ea232a890462c2bca579.tar.gz"
+    sha256 "76f34fff8440f10896d78005148964d7b68f7c15fd9cbd572fbf1f5436ef36cc"
+  end
+
   def install
+    use_fennel_tools_grammars
+
     system "cargo", "install", "-vv", "--features", "steel", *std_cargo_args(path: "helix-term")
     resource("steel").stage do
       system "cargo", "install", "-vv", *std_cargo_args(path: "crates/forge")
@@ -42,6 +51,42 @@ class HelixSteel < Formula
     bash_completion.install "contrib/completion/hx.bash" => "hx"
     fish_completion.install "contrib/completion/hx.fish"
     zsh_completion.install "contrib/completion/hx.zsh" => "_hx"
+  end
+
+  # Swap the fork's Fennel grammar (alexmozaidze/tree-sitter-fennel) for
+  # fennel-tools' grammars and queries. Helix compiles languages.toml into the
+  # binary and builds the grammars it lists during `cargo install`, so this has
+  # to happen first. See docs/helix-steel.md.
+  def use_fennel_tools_grammars
+    fennel_tools = buildpath/"fennel-tools"
+    resource("fennel-tools").stage(fennel_tools)
+    grammars = fennel_tools/"tree-sitter-fennel"
+
+    inreplace "languages.toml",
+      'source = { git = "https://github.com/alexmozaidze/tree-sitter-fennel", ' \
+      'rev = "3f0f6b24d599e92460b969aabc4f4c5a914d15a0" }',
+      "source = { path = \"#{grammars}\" }"
+
+    # The simpler s-expression grammar, for Parry. A language with no file
+    # types never applies to a buffer; it only lets plugins parse with it by
+    # name (rope->tssyntax).
+    File.open("languages.toml", "a") do |f|
+      f.puts <<~TOML
+
+        [[language]]
+        name = "fennel-sexp"
+        scope = "source.fennel-sexp"
+        grammar = "fennel_sexp"
+        file-types = []
+
+        [[grammar]]
+        name = "fennel_sexp"
+        source = { path = "#{grammars}/generic" }
+      TOML
+    end
+
+    rm_r "runtime/queries/fennel"
+    cp_r grammars/"queries", "runtime/queries/fennel"
   end
 
   def caveats
@@ -61,6 +106,10 @@ class HelixSteel < Formula
     # Not `hx --health` like homebrew-core's helix: on this fork it never
     # returns inside the brew test sandbox (fine on a normal shell).
     assert_match(/helix \d+\.\d+/, shell_output("#{bin}/hx --version"))
+
+    # Fennel grammars and queries come from fennel-tools
+    assert_path_exists libexec/"runtime/grammars/#{shared_library("fennel_sexp")}"
+    assert_match "jarodwr/tap helix-steel", (libexec/"runtime/queries/fennel/highlights.scm").read
 
     ENV["STEEL_HOME"] = testpath/"steel"
     assert_match "Steel Package Manager", shell_output("#{bin}/forge help")
