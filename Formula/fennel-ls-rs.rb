@@ -6,6 +6,11 @@ class FennelLsRs < Formula
   sha256 "76f34fff8440f10896d78005148964d7b68f7c15fd9cbd572fbf1f5436ef36cc"
   head "https://github.com/Jarodwr/fennel-tools.git", branch: "main"
 
+  bottle do
+    root_url "https://github.com/Jarodwr/homebrew-tap/releases/download/fennel-ls-rs-0.1.0"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe: "f203d5104196c13cfb1ac5ae92edd5668bd5044d05a46731daef7f732a0dd04d"
+  end
+
   depends_on "rust" => :build
 
   # Same `fennel-ls` binary name as homebrew-core's Lua implementation, which
