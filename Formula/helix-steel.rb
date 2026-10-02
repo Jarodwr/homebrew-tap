@@ -14,7 +14,10 @@ class HelixSteel < Formula
     sha256 cellar: :any, arm64_tahoe: "1d8fa57e9b33095360c771b209448785b8b53612fda4edd31d8440842854b606"
   end
 
+  depends_on "pkgconf" => :build
   depends_on "rust" => :build
+  # forge's git/https support links libssl when Homebrew's OpenSSL is present
+  depends_on "openssl@3"
 
   conflicts_with "helix", because: "both install `hx` binaries"
   conflicts_with "evil-helix", because: "both install `hx` binaries"
