@@ -20,7 +20,7 @@ class FennelLsRs < Formula
     assert_match "fennel-ls #{version}", shell_output("#{bin}/fennel-ls --version")
 
     (testpath/"bad.fnl").write "(fn add [a b]\n  (+ a b)\n"
-    # `check` reports problems on stdout but exits 0 either way
-    assert_match "unclosed delimiter", shell_output("#{bin}/fennel-ls check #{testpath}/bad.fnl")
+    # `check` prints diagnostics and exits 1 when it finds errors
+    assert_match "unclosed delimiter", shell_output("#{bin}/fennel-ls check #{testpath}/bad.fnl", 1)
   end
 end
