@@ -11,7 +11,7 @@ brew install jarodwr/tap/<formula>
 
 | Formula | What |
 |---|---|
-| `helix-steel` | [Helix](https://helix-editor.com) built from [mattwparas/helix `steel-event-system`](https://github.com/mattwparas/helix/blob/steel-event-system/STEEL.md), with the Steel plugin system enabled |
+| `helix-steel` | [Helix](https://helix-editor.com) built from [mattwparas/helix `steel-event-system`](https://github.com/mattwparas/helix/blob/steel-event-system/STEEL.md), with the Steel plugin system enabled, plus `forge`, Steel's package manager |
 
 ### helix-steel
 
@@ -29,6 +29,10 @@ latest commit instead:
 brew install --HEAD jarodwr/tap/helix-steel
 brew upgrade --fetch-HEAD jarodwr/tap/helix-steel   # later, to update
 ```
+
+`forge` is built from the Steel commit that the fork's `Cargo.lock` pins, so
+when moving the Helix pin, update the `steel` resource to match
+(`grep -A2 'name = "steel-core"' Cargo.lock` in the fork).
 
 To move the pin, change `url`, `version` and `sha256` in
 `Formula/helix-steel.rb` (`curl -sL <url> | shasum -a 256`).
