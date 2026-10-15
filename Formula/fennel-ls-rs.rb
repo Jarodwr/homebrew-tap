@@ -1,15 +1,10 @@
 class FennelLsRs < Formula
   desc "Language server for Fennel, written in Rust"
   homepage "https://github.com/Jarodwr/fennel-tools"
-  url "https://github.com/Jarodwr/fennel-tools/archive/31fe082d2ca0e839d15c8d78e0c786b04179e4a1.tar.gz"
-  version "0.2.1"
-  sha256 "5ef99620cc0c4bdc1d82288c7ca3f5a06718c4533f39bda52bb7a7bff0e092f7"
+  url "https://github.com/Jarodwr/fennel-tools/archive/09a7c960ab6674ce9e6cd8e4408e639642411643.tar.gz"
+  version "0.2.2"
+  sha256 "511cb6c9a83a8b6d5e8a475142fc05e21c05c9242a144261fc7ed2d15c5bd252"
   head "https://github.com/Jarodwr/fennel-tools.git", branch: "main"
-
-  bottle do
-    root_url "https://github.com/Jarodwr/homebrew-tap/releases/download/fennel-ls-rs-0.2.1"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe: "5d12d79d6e33bdcab7932a73b470d055c8f13df61937de6bff431c173fd81dab"
-  end
 
   depends_on "rust" => :build
 
