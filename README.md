@@ -13,6 +13,7 @@ brew install jarodwr/tap/<formula>
 |---|---|
 | `helix-steel` | [Helix](https://helix-editor.com) built from [mattwparas/helix `steel-event-system`](https://github.com/mattwparas/helix/blob/steel-event-system/STEEL.md), with the Steel plugin system enabled, plus `forge`, Steel's package manager |
 | `fennel-ls-rs` | [fennel-ls](https://github.com/Jarodwr/fennel-tools), the Fennel language server from fennel-tools (Rust). Conflicts with homebrew-core's Lua `fennel-ls` |
+| `workyard` | [Workyard](https://github.com/Jarodwr/workyard), a local-first kanban for coordinating AI coding agents: the `workyard` CLI and orchestrator, plus a Claude Code plugin. Built from source; see [docs/workyard.md](docs/workyard.md) |
 
 ### helix-steel
 
