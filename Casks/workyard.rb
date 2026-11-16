@@ -1,6 +1,6 @@
 cask "workyard" do
-  version "0.1.0"
-  sha256 "96e22c6e6a7de7213d3fd477aa2a3d35c3ae67469325a5b558672ed8c4e443bd"
+  version "0.1.1"
+  sha256 "d4d99485739da43cc77ddc7c29a8d16bc388d8eb5e0a7c5124c6ebb5d6715f3a"
 
   url "https://github.com/Jarodwr/workyard/releases/download/v#{version}/Workyard-#{version}-aarch64.dmg"
   name "Workyard"
