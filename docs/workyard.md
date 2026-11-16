@@ -33,7 +33,7 @@ binary name); install one of them. The cask is Apple silicon only: `scripts/rele
 builds one dmg for the host architecture. For Intel, build a second dmg on an Intel Mac and switch
 the cask to `arch` and `sha256 arm: ..., intel: ...`.
 
-The cask has no dmg checksum yet (`sha256 :no_check`); render again with the dmg checksum before publishing.
+The dmg is not notarized unless it was built with the `APPLE_*` variables; see docs/HOMEBREW.md in the Workyard repository.
 
 ## Updating
 
