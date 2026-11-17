@@ -9,7 +9,7 @@ release dmg instead. Keep this file up to date whenever either changes.
 
 | What | Pinned to | Where |
 |---|---|---|
-| Workyard | `v0.1.1` | `url` / `sha256` (`version` is read from the tag) |
+| Workyard | `v0.1.2` | `url` / `sha256` (`version` is read from the tag) |
 
 `brew install --HEAD jarodwr/tap/workyard` builds the `main` branch instead.
 

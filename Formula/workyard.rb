@@ -1,8 +1,8 @@
 class Workyard < Formula
   desc "Local-first kanban for coordinating AI coding agents"
   homepage "https://github.com/Jarodwr/workyard"
-  url "https://github.com/Jarodwr/workyard/archive/refs/tags/v0.1.1.tar.gz"
-  sha256 "db32c58f52b767a0b2203e96a31b508bb8088164f0a0fc7c6796317780619d0a"
+  url "https://github.com/Jarodwr/workyard/archive/refs/tags/v0.1.2.tar.gz"
+  sha256 "fa686f1c09d9ed79194e2d05cafd47a434945394c514991a626230aacb0ff0ca"
   license "MIT"
   head "https://github.com/Jarodwr/workyard.git", branch: "main"
 
